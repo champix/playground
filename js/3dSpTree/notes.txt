@@ -1,0 +1,91 @@
+We need to have DEFAULT KEYS = movement :
+wasd/zqsd/uldr = fps style
+shift, space = z-up
+ctrl, c = z-down
+
+
+var up = false,
+    right = false,
+    down = false,
+    left = false,
+    x = window.innerWidth/2-130/2,
+    y = window.innerHeight/2-130/2
+document.addEventListener('keydown',press)
+function press(e){
+  if (e.keyCode === 38 /* up */ || e.keyCode === 87 /* w */ || e.keyCode === 90 /* z */){
+    up = true
+  }
+  if (e.keyCode === 39 /* right */ || e.keyCode === 68 /* d */){
+    right = true
+  }
+  if (e.keyCode === 40 /* down */ || e.keyCode === 83 /* s */){
+    down = true
+  }
+  if (e.keyCode === 37 /* left */ || e.keyCode === 65 /* a */ || e.keyCode === 81 /* q */){
+    left = true
+  }
+}
+document.addEventListener('keyup',release)
+function release(e){
+  if (e.keyCode === 38 /* up */ || e.keyCode === 87 /* w */ || e.keyCode === 90 /* z */){
+    up = false
+  }
+  if (e.keyCode === 39 /* right */ || e.keyCode === 68 /* d */){
+    right = false
+  }
+  if (e.keyCode === 40 /* down */ || e.keyCode === 83 /* s */){
+    down = false
+  }
+  if (e.keyCode === 37 /* left */ || e.keyCode === 65 /* a */ || e.keyCode === 81 /* q */){
+    left = false
+  }
+}
+function gameLoop(){
+  var div = document.querySelector('div')
+  if (up){
+    y = y - 10
+  }
+  if (right){
+    x = x + 10
+  }
+  if (down){
+    y = y + 10
+  }
+  if (left){
+    x = x - 10
+  }
+  div.style.left = x+'px'
+  div.style.top = y+'px'
+  window.requestAnimationFrame(gameLoop)
+}
+window.requestAnimationFrame(gameLoop)
+
+
+
+Right click hold = look around (FPS style)
+Left click = interact
+
+Some interactions, or prompts (all inside 3d scene), will place the prompt in front of the camera, and enter INPUT mode
+
+in INPUT mode, movement keys listeners are paused. (think of it as a "modal form")
+
+the modal must be closed/minimized for the movements listeners to be resumed.
+
+
+Movement (FPS style) is a camera MODE
+
+camera MODE can be toggled between :
+	-FPS style
+	-Tree centered :
+		The camera is centered on the selected NODE (or tree root)
+		A camera control panel is showed :
+			Camera target : Selection(node) OR Fixed(focus tree center)
+			we can rotate (rotate around selected node OR tree center) using mouse (right click), zoom using mousewheel
+			
+			
+			
+Hovering a node changes cursor, (and node highlights)
+Click a node "Selects" it
+ESCAPE key unselects
+Clicking on other node UNSELECTS
+Clicking on "nothing" UNSELECTS

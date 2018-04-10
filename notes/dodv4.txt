@@ -1,0 +1,58 @@
+ideas :
+
+Js is concat in php session:
+	$sessionJsId = uniqid();
+	$_session['js'][$sessionJsId] = $js;
+	Async ajax load ROOT_URL?action=getJs&jsId=$sessionJsId
+
+
+Write a generic_controller class
+Write a SITE entity/controller
+Entities have 1 controller each
+All controllers extend generic_controller
+Each controller has his "features" and associated "routes"
+Each "feature" defines if its authless or not
+if authless == false, only SUPER can run it, else it needs to be declared in database
+
+Use Routes (howto implement ?)
+Every controller has ROUTES, hardcode them for now, keep in mind database integration of routes
+
+To match routes, we need to get all routes (get them from the CLASSES)
+How do we do that ?
+Answer :
+We get the ROUTES from the database, table routes :
+	[id] (SERIAL)
+	[route] (ROOT_URL/rev/$1/view)
+	[route_methods] (['post','get'])
+	[route_entity] (\dod\core\entities\revision)
+	[route_dispatch] (call class method with arguments)
+$entities = $_db->getRows('SELECT DISTINCT(route_entity) FROM routes;')
+
+
+we need a $db class which implements an interface
+interface must provide methods :
+	escapeStr()
+	query($query)
+	runQueries($array_of_queries)
+	getRows($query)
+	getRow($query)
+	getSingleRes($query)
+	getRowsColumnByName($query, $colName)
+	getRowsColumnByNum($query, $colNum = 0)
+	getRowsCount($query)
+	phpToSqlIn($php_array)
+	phptoSqlRows($php_rows)
+	
+Implement postgres json operators 
+->	int	Get JSON array element	'[1,2,3]'::json->2
+->	text	Get JSON object field	'{"a":1,"b":2}'::json->'b'
+->>	int	Get JSON array element as text	'[1,2,3]'::json->>2
+->>	text	Get JSON object field as text	'{"a":1,"b":2}'::json->>'b'
+To be used as :
+$path = "ROOT->0->'fubar'->'value'"; //First row, property 'fubar', property 'value'
+$targetVal = arrayWalker::getRes($array_or_object, $path);
+
+Implement arrayWalker::array_column_nested($collection, $path)
+$path = "ROOT->'fubar'->'value'";
+$array_column_nested = arrayWalker::array_column_nested($collection, $path);
+Source ideas: https://github.com/igorw/get-in (implement get_in, assoc_in[create/update value with a variable] and update_in[update a value with a function that can read current value]

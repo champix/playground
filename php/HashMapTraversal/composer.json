@@ -1,0 +1,10 @@
+{
+	"autoload": {
+        "psr-4": {
+            "idema\\utils\\arr\\": "src"
+        }
+    },
+	"require": {
+		"igorw/get-in": "^1.0"
+	}
+}
