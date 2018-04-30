@@ -1,0 +1,6 @@
+<?php
+	define('DS', DIRECTORY_SEPARATOR);
+	define('IS_WWW', true);
+	require_once(__DIR__.DS.'config.php');
+	require_once(APP_PATH.DS.'start.php');
+?>

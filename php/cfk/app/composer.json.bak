@@ -1,0 +1,22 @@
+{
+	"autoload": {
+        "psr-4": {
+            "cfk\\": "src_cfk",
+			"ypnh\\": "src_ypnh"
+        }
+    },
+    "require": {
+        "jenssegers/agent": "^2.5",
+        "phpoffice/phpexcel": "^1.8",
+        "tecnickcom/tcpdf": "^6.2",
+        "mpdf/mpdf": "^6.1",
+        "phpmailer/phpmailer": "^5.2",
+        "danielstjules/stringy": "^3.0",
+        "vlucas/valitron": "^1.4",
+        "ralouphie/mimey": "^1.0",
+		"nuxia/business-day-manipulator": "^0.1.0",
+		"sunra/dbug": "^0.2.1",
+		"gregwar/captcha": "^1.1",
+		"maennchen/zipstream-php": "^0.5.2"
+    }
+}

@@ -1,0 +1,8 @@
+{
+	"autoload": {
+        "psr-4": {
+            "cfk\\": "src_cfk",
+			"ypnh\\": "src_ypnh"
+        }
+    }
+}
